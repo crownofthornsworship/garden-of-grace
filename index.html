@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#173f2e">
+  <meta name="description" content="A peaceful Christian gardening story about generosity, restoration, and grace.">
+  <title>Garden of Grace: Return to Eden</title>
+  <link rel="stylesheet" href="styles.css">
+<meta property="og:type" content="website"><meta property="og:title" content="Garden of Grace"><meta property="og:description" content="Plant, nurture, and discover a story of generosity and restoration."><meta property="og:url" content="https://crownofthornsworship.github.io/garden-of-grace/"><meta property="og:image" content="https://crownofthornsworship.github.io/garden-of-grace/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Garden of Grace game artwork"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Garden of Grace"><meta name="twitter:description" content="Plant, nurture, and discover a story of generosity and restoration."><meta name="twitter:image" content="https://crownofthornsworship.github.io/garden-of-grace/og.png"></head>
+<body>
+  <main class="game-shell" id="game">
+    <section class="world" aria-label="Eden's Reach garden">
+      <img class="world-art" id="sceneBackground" src="assets/custom-garden-mobile.png" alt="The garden at Eden's Reach">
+      <div class="shade"></div>
+      <div class="garden-stage" id="gardenStage" aria-label="Customizable garden">
+        <img class="player-avatar" id="playerAvatar" src="assets/avatar-gardener.png" alt="Your gardener">
+        <img class="npc-avatar hidden" id="npcAvatar" src="assets/npc-miriam.png" alt="Miriam">
+        <section class="speech-bubble" id="speechBubble" role="button" tabindex="0" aria-label="Continue conversation" aria-live="polite">
+          <button class="bubble-close" id="bubbleClose" type="button" aria-label="Hide conversation">×</button>
+          <b id="bubbleSpeaker">Miriam</b><span id="bubbleText"></span><small>tap to continue</small>
+        </section>
+        <button class="chat-reopen hidden" id="chatReopen" type="button" aria-label="Show conversation">💬 Chat</button>
+        <div id="placedDecor"></div>
+        <div class="plot-grid" id="plotGrid" aria-label="Garden plots"></div>
+      </div>
+      <header class="topbar">
+        <button class="brand" id="homeButton" aria-label="Open game menu">
+          <span class="leaf-mark">❧</span>
+          <span><strong>Garden of Grace</strong><small>Return to Eden</small></span>
+        </button>
+        <div class="resources" aria-label="Resources">
+          <span title="Energy">☀ <b id="energy">5</b></span>
+          <span title="Berries and food">🫐 <b id="food">1</b></span>
+          <span title="Seeds">🌱 <b id="seeds">6</b></span>
+          <span title="Wood">🪵 <b id="wood">0</b></span>
+          <span title="Coins">🪙 <b id="coins">0</b></span>
+        </div>
+      </header>
+
+      <aside class="quest-card" id="questCard">
+        <span>CHAPTER ONE</span>
+        <strong id="questTitle">A Garden Waiting</strong>
+        <div class="progress-track"><i id="progressBar"></i></div>
+        <p id="questText">Clear the first bed and discover what this garden can become.</p>
+      </aside>
+      <button class="quest-tab hidden" id="questTab" type="button" aria-label="Show chapter title">Chapter One</button>
+
+      <div class="hotspots" id="hotspots" aria-label="Garden actions"></div>
+      <button class="sound-prompt hidden" id="soundPrompt" type="button">🔊 Enable sound</button>
+      <div class="audio-status hidden" id="audioStatus" aria-live="polite">♫ Music · Narrator</div>
+
+      <section class="story-card hidden obsolete" id="storyCard" aria-live="polite">
+        <div class="speaker-row">
+          <div class="portrait" id="portrait">M</div>
+          <div><small id="speakerRole">GARDEN KEEPER</small><h1 id="speaker">Miriam</h1></div>
+          <button class="close-story" id="closeStory" aria-label="Close dialogue">×</button>
+        </div>
+        <p class="story-text" id="storyText"></p>
+        <div class="choices" id="choices"></div>
+      </section>
+
+      <nav class="dock" aria-label="Game controls">
+        <button id="gardenButton"><span>♧</span>Garden</button>
+        <button id="storyButton" class="active"><span>☷</span>Story</button>
+        <button id="journalButton"><span>✧</span>Journal</button>
+        <button id="storeButton"><span>◇</span>Store</button>
+        <button id="audioButton"><span>♫</span>Audio</button>
+      </nav>
+      <div class="guide-arrow hidden" id="guideArrow" aria-hidden="true"><span>Begin Daniel’s story</span>↓</div>
+      <section class="opening-screen" id="openingScreen" aria-label="Create your gardener">
+        <div class="opening-panel">
+          <span class="opening-leaf">❧</span>
+          <h1>Garden of Grace</h1>
+          <p class="opening-subtitle">Return to Eden</p>
+          <h2>Choose your gardener</h2>
+          <div class="character-choice">
+            <button type="button" class="character-card selected" data-character="woman"><img src="assets/avatar-gardener.png" alt="Woman gardener"><b>Woman</b></button>
+            <button type="button" class="character-card" data-character="man"><img src="assets/avatar-man.png" alt="Man gardener"><b>Man</b></button>
+          </div>
+          <label>Character name<input id="playerName" maxlength="24" autocomplete="nickname" placeholder="What should we call you?"></label>
+          <label>Email <span>(optional)</span><input id="playerEmail" type="email" autocomplete="email" placeholder="For future account recovery"></label>
+          <small class="privacy-note">For this test, your name, email, and progress stay only on this device. Cross-device accounts are not active yet.</small>
+          <button class="start-game" id="startGame">Begin a New Story</button>
+          <button class="continue-game" id="continueGame" hidden>Continue My Garden</button>
+        </div>
+      </section>
+    </section>
+
+    <dialog id="modal">
+      <div class="modal-inner" id="modalContent"></div>
+    </dialog>
+  </main>
+  <script src="game.js"></script>
+<footer style="text-align:center;padding:12px;font:14px system-ui"><a style="color:inherit" href="https://venmo.com/u/MTA-7777" target="_blank" rel="noopener">⚡ Buy Mike a C4 · @MTA-7777</a></footer></body>
+</html>
